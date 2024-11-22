@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List</title>
+  <style>
+    .todo-container {
+      width: 300px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+    }
+    .todo-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .todo-header h3 {
+      margin: 0;
+    }
+    .todo-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 10px 0;
+    }
+    .todo-item input {
+      margin-right: 10px;
+    }
+    .remove-btn {
+      color: red;
+      cursor: pointer;
+    }
+    .add-btn {
+      cursor: pointer;
+      font-size: 20px;
+      background: none;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="todo-container">
+    <div class="todo-header">
+      <h3>Earning</h3>
+      <button class="add-btn" onclick="addTodo()">+</button>
+    </div>
+    <div id="todo-list"></div>
+  </div>
+
+  <script>
+    // Function to add a new to-do item
+    function addTodo() {
+      const todoList = document.getElementById('todo-list');
+
+      // Create the item container
+      const todoItem = document.createElement('div');
+      todoItem.className = 'todo-item';
+
+      // Create the type input
+      const typeInput = document.createElement('input');
+      typeInput.type = 'text';
+      typeInput.placeholder = 'Type';
+
+      // Create the value input
+      const valueInput = document.createElement('input');
+      valueInput.type = 'number';
+      valueInput.value = 0;
+
+      // Create the remove button
+      const removeBtn = document.createElement('span');
+      removeBtn.textContent = '✖';
+      removeBtn.className = 'remove-btn';
+      removeBtn.onclick = () => todoList.removeChild(todoItem);
+
+      // Append elements to the item container
+      todoItem.appendChild(typeInput);
+      todoItem.appendChild(valueInput);
+      todoItem.appendChild(removeBtn);
+
+      // Append the item container to the list
+      todoList.appendChild(todoItem);
+    }
+  </script>
+</body>
+</html>

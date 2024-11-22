@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Earning List</title>
+    <style>
+        .earning-box {
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 300px;
+        }
+        .earning-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        .add-btn, .remove-btn {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 5px;
+            cursor: pointer;
+        }
+        .remove-btn {
+            background-color: #DC3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="earning-box">
+        <h3>Earning</h3>
+        <div id="earning-list">
+            <!-- Earning items will appear here -->
+        </div>
+        <button class="add-btn" onclick="addEarning()">+</button>
+    </div>
+
+    <script>
+        // Add default earning item with value 1
+        function addEarning() {
+            const earningList = document.getElementById('earning-list');
+            const earningItem = document.createElement('div');
+            earningItem.className = 'earning-item';
+            earningItem.innerHTML = `
+                <input type="text" placeholder="Type" />
+                <input type="number" value="1" />
+                <button class="remove-btn" onclick="removeEarning(this)">X</button>
+            `;
+            earningList.appendChild(earningItem);
+        }
+
+        // Remove an earning item
+        function removeEarning(button) {
+            const earningItem = button.parentNode;
+            earningItem.remove();
+        }
+
+        // Initialize with one earning item
+        window.onload = () => addEarning();
+    </script>
+</body>
+</html>

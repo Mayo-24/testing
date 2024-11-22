@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Deduction List</title>
+    <style>
+        .deduction-box {
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 300px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .deduction-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .deduction-item input {
+            width: 40%;
+            padding: 5px;
+        }
+        .add-btn, .remove-btn {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .add-btn:hover {
+            background-color: #0056b3;
+        }
+        .remove-btn {
+            background-color: #DC3545;
+        }
+        .remove-btn:hover {
+            background-color: #a71d2a;
+        }
+        .total {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="deduction-box">
+        <h3>Deductions</h3>
+        <div id="deduction-list">
+            <!-- Deduction items will appear here -->
+        </div>
+        <button class="add-btn" onclick="addDeduction()">+</button>
+        <div class="total">
+            Total Deduction: <span id="total-deductions">0.00</span>
+        </div>
+    </div>
+
+    <script>
+        // Add default deduction item
+        function addDeduction() {
+            const deductionList = document.getElementById('deduction-list');
+            const deductionItem = document.createElement('div');
+            deductionItem.className = 'deduction-item';
+            deductionItem.innerHTML = `
+                <input type="text" placeholder="Deduction Type" />
+                <input type="number" value="1" oninput="updateTotalDeductions()" />
+                <button class="remove-btn" onclick="removeDeduction(this)">X</button>
+            `;
+            deductionList.appendChild(deductionItem);
+            updateTotalDeductions(); // Update total after adding
+        }
+
+        // Remove a deduction item
+        function removeDeduction(button) {
+            const deductionItem = button.parentNode;
+            deductionItem.remove();
+            updateTotalDeductions(); // Update total after removal
+        }
+
+        // Calculate and update the total deductions
+        function updateTotalDeductions() {
+            const deductionInputs = document.querySelectorAll('#deduction-list input[type="number"]');
+            let total = 0;
+            deductionInputs.forEach(input => {
+                total += parseFloat(input.value) || 0; // Ensure numeric conversion
+            });
+            document.getElementById('total-deductions').innerText = total.toFixed(2);
+        }
+
+        // Initialize with one deduction item on page load
+        window.onload = () => addDeduction();
+    </script>
+</body>
+</html>
